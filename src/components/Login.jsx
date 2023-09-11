@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Login() {
 
+  // 이메일, 비밀번호 입력값 state
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
 
-  // 3-1. 정규식 일치 여부 체크 state 생성
+  // 3-1. 정규식 일치 여부 체크 state
   const [emailValid, setEmailValid] = useState(false);
   const [pwValid, setPwValid] = useState(false);
-
 
   const handleEmail = (e) => {
     // 1. email input창에 입력 받을 수 있게 하기 (e.target.value)
@@ -37,6 +37,21 @@ export default function Login() {
     }
 
   }
+
+  // 버튼 활성화 여부 체크 state
+  const [notAllow, setNotAllow] = useState(true);
+
+  // 이메일 및 비밀번호 유효성에 따른 버튼 상태 설정
+  useEffect(() => {
+    if (emailValid && pwValid) {
+      setNotAllow(false);
+      return
+    } else {
+      setNotAllow(true);
+    }
+  }, [emailValid, pwValid])
+
+
 
   return (
     <div className='page'>
@@ -76,7 +91,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button disabled={true} className='btn'>확인</button>
+          <button disabled={notAllow} className='btn'>확인</button>
         </div>
 
     </div>
