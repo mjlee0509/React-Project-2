@@ -51,7 +51,20 @@ export default function Login() {
     }
   }, [emailValid, pwValid])
 
+  
+  // 더미 데이터를 만들어 잘 작동하는지 테스트해보자
+  const user1 = {
+    email : 'test1@gmail.com',
+    pw : 'aaaaaa@1010'
+  }
 
+  const confirm = () => {
+    if (email === user1.email && pw === user1.pw) {
+      alert("환영합니다~!~! 👻")
+    } else {
+      alert("회원 정보를 찾을 수 없습니다 😭")
+    }
+  }
 
   return (
     <div className='page'>
@@ -91,7 +104,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button disabled={notAllow} className='btn'>확인</button>
+          <button onClick={confirm} disabled={notAllow} className='btn'>확인</button>
         </div>
 
     </div>
